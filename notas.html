@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Notas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SheetJS -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+    
+    <!-- Banner -->
+    <header class="banner">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white" id="asignatura-titulo">Registro de Notas</h1>
+            <button class="btn btn-light mt-3" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i> Volver a asignaturas
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="container my-5">
+        <div class="alert alert-info" role="alert">
+            <i class="fas fa-info-circle"></i> Ingrese las notas de los estudiantes (1.0 - 7.0) y ajuste las ponderaciones según sea necesario.
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover excel-like" id="tabla-notas">
+                <thead class="table-dark">
+                    <!-- Fila única de encabezados -->
+                    <tr>
+                        <th class="student-col">Nombre Estudiante</th>
+                        <th>
+                            Ponderacion <br>Nota 1<br>
+                            <div class="input-group ponderacion-group">
+                                <input type="number" class="form-control ponderacion" 
+                                       value="20" min="0" max="100" aria-label="Ponderación Nota 1">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </th>
+                        <th>
+                            Ponderacion <br>Nota 2<br>
+                            <div class="input-group ponderacion-group">
+                                <input type="number" class="form-control ponderacion" 
+                                       value="20" min="0" max="100" aria-label="Ponderación Nota 2">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </th>
+                        <th>
+                            Ponderacion <br>Nota 3<br>
+                            <div class="input-group ponderacion-group">
+                                <input type="number" class="form-control ponderacion" 
+                                       value="20" min="0" max="100" aria-label="Ponderación Nota 3">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </th>
+                        <th>
+                            Ponderacion <br>Nota 4<br>
+                            <div class="input-group ponderacion-group">
+                                <input type="number" class="form-control ponderacion" 
+                                       value="20" min="0" max="100" aria-label="Ponderación Nota 4">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </th>
+                        <th>
+                            Ponderacion <br>Nota 5<br>
+                            <div class="input-group ponderacion-group">
+                                <input type="number" class="form-control ponderacion" 
+                                       value="20" min="0" max="100" aria-label="Ponderación Nota 5">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </th>
+                        <th class="text-center">
+                            Promedio Final<br>
+                            <span id="suma-ponderaciones">100%</span>
+                            <div class="mt-1">
+                                <button class="btn btn-sm btn-success" id="btn-guardar">
+                                    <i class="fas fa-save"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary ms-1" id="btn-exportar">
+                                    <i class="fas fa-file-excel"></i>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas de estudiantes se generarán aquí -->
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-primary" id="btn-agregar">
+                <i class="fas fa-plus"></i> Agregar Estudiante
+            </button>
+            <button class="btn btn-danger" id="btn-eliminar">
+                <i class="fas fa-trash"></i> Eliminar Estudiante
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Estudiante -->
+    <div class="modal fade" id="modalEstudiante" tabindex="-1" aria-labelledby="modalEstudianteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEstudianteLabel">Agregar Nuevo Estudiante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-estudiante">
+                        <div class="mb-3">
+                            <label for="nombres-estudiante" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="nombres-estudiante" required
+                                   aria-describedby="nombresHelp">
+                            <div id="nombresHelp" class="form-text">Ingrese los nombres del estudiante</div>
+                            <div class="invalid-feedback">Por favor ingrese los nombres del estudiante</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidos-estudiante" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos-estudiante" required
+                                   aria-describedby="apellidosHelp">
+                            <div id="apellidosHelp" class="form-text">Ingrese los apellidos del estudiante</div>
+                            <div class="invalid-feedback">Por favor ingrese los apellidos del estudiante</div>
+                        </div>
+                    </form>
+                </div>                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-confirmar">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Estudiante -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEliminarLabel">Eliminar Estudiante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Seleccione el estudiante que desea eliminar:</p>
+                    <select class="form-select" id="select-estudiante" aria-label="Seleccionar estudiante a eliminar">
+                        <!-- Opciones generadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Componentes -->
+    <script src="js/components.js"></script>
+    <!-- Script principal -->
+    <script src="js/script.js"></script>
+</body>
+</html>

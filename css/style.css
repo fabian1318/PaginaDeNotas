@@ -1,0 +1,240 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/libro-clases.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards de asignaturas */
+.card-asignatura {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-asignatura:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.btn-ingresar {
+    margin-top: auto;
+}
+
+/* Tabla de notas */
+.excel-like {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.excel-like th, .excel-like td {
+    border: 1px solid #dee2e6;
+    padding: 8px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.excel-like th {
+    background-color: #343a40;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.excel-like tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.excel-like tr:hover {
+    background-color: #e9ecef;
+}
+
+.student-col {
+    min-width: 200px;
+    text-align: left !important;
+    font-weight: bold;
+}
+
+/* Inputs */
+.input-nota {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input-nota:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    outline: 0;
+}
+
+/* Ponderaciones */
+.input-group.ponderacion-group {
+    width: 100px;
+    margin: 0 auto;
+}
+
+.input-group.ponderacion-group .form-control {
+    text-align: center;
+    height: 30px;
+}
+
+.input-group.ponderacion-group .input-group-text {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 5px !important;
+    color: #fcfcfc;
+    font-weight: bold;
+}
+
+/* Promedio */
+.promedio-final {
+    font-weight: bold;
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Validaciones */
+.input-nota.invalida {
+    border: 2px solid #dc3545 !important;
+    background-color: #fff5f5 !important;
+    animation: shake 0.5s;
+}
+
+.mensaje-error {
+    color: #dc3545;
+    font-size: 0.75rem;
+    margin-top: 3px;
+    height: 15px;
+    display: none;
+}
+
+.input-nota.invalida + .mensaje-error {
+    display: block;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Eliminar flechas de inputs numéricos */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Botones */
+#btn-exportar {
+    background-color: #1d6f42;
+    border-color: #1a633b;
+}
+
+#btn-exportar:hover {
+    background-color: #1a633b;
+    border-color: #165832;
+}
+
+/* Efectos visuales */
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Notificaciones */
+.alert.position-fixed {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-asignatura {
+        margin-bottom: 20px;
+    }
+    
+    .student-col {
+        min-width: 150px;
+    }
+    
+    .input-nota {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .input-group.ponderacion-group {
+        width: 80px;
+    }
+    
+    #tabla-notas {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-img-top {
+        height: 150px;
+    }
+    
+    .btn-ingresar {
+        font-size: 0.9rem;
+    }
+}
+
+.nota-input.invalida {
+    border-color: #dc3545;
+    background-color: #fff3f3;
+}
+
+.mensaje-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    display: none;
+    margin-top: 0.25rem;
+}
