@@ -34,7 +34,6 @@ function cargarComponentes() {
                 <p>&copy; 2025 Plataforma de Gestión Docente | Proyecto académico - Inacap</p>
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item"><a class="text-white text-decoration-none" href="index.html">Inicio</a></li>
-                    <li class="list-inline-item"><a class="text-white text-decoration-none" href="notas.html">Notas</a></li>
                 </ul>
                 <p><i class="fas fa-envelope"></i> contacto@Inacap.cl | <i class="fas fa-phone"></i> +56 9 1234 5678</p>
                 <div class="mt-2">
